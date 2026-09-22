@@ -5,6 +5,6 @@ dbt_learn_repo:
       type: snowflake
       role: ACCOUNTADMIN
       warehouse: COMPUTE_WH
-      database: DBT_DATABSE
+      database: DBT_DATABASE
       schema: PUBLIC
       threads: 8
