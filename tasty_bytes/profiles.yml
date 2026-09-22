@@ -1,4 +1,4 @@
-dbt_learn_repo:
+tasty_bytes:
   target: dev
   outputs:
     dev:
@@ -6,5 +6,5 @@ dbt_learn_repo:
       role: ACCOUNTADMIN
       warehouse: COMPUTE_WH
       database: DBT_DATABSE
-      schema: RAW_LAYER
+      schema: PUBLIC
       threads: 8
