@@ -1,0 +1,69 @@
+-- CREATE WAREHOUSE AND DATABASE
+CREATE WAREHOUSE TRANSFORMING;
+CREATE DATABASE RAW;
+CREATE DATABASE ANALYTICS;
+CREATE SCHEMA RAW.JAFFLE_SHOP;
+CREATE SCHEMA RAW.STRIPE;
+
+-- CUSTOMERS
+CREATE OR REPLACE TABLE RAW.JAFFLE_SHOP.CUSTOMERS
+    (
+        ID INTEGER,
+        FIRST_NAME STRING,
+        LAST_NAME STRING
+    )
+;
+
+-- INSERT DATA INTO CUSTOMERS TABLE
+COPY INTO RAW.JAFFLE_SHOP.CUSTOMERS (ID, FIRST_NAME, LAST_NAME)
+FROM 's3://dbt-tutorial-public/jaffle_shop_customers.csv'
+file_format = (
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+)
+;
+
+-- ORDERS
+CREATE OR REPLACE TABLE RAW.JAFFLE_SHOP.ORDERS 
+    (
+        ID INTEGER,
+        USER_ID INTEGER,
+        ORDER_DATE DATE,
+        STATUS VARCHAR,
+        _ETL_LOADED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ;
+
+COPY INTO RAW.JAFFLE_SHOP.ORDERS (ID, USER_ID, ORDER_DATE, STATUS)
+FROM 's3://dbt-tutorial-public/jaffle_shop_orders.csv'
+file_format = (
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+);
+
+-- PAYMENT
+CREATE OR REPLACE TABLE RAW.STRIPE.PAYMENT
+    (
+        ID INTEGER,
+        ORDERID INTEGER,
+        PAYMENTMETHOD STRING,
+        STATUS STRING,
+        AMOUNT INTEGER,
+        CREATED DATE,
+        _BATCHED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+COPY INTO RAW.STRIPE.PAYMENT (ID, ORDERID, PAYMENTMETHOD, STATUS, AMOUNT, CREATED)
+FROM 's3://dbt-tutorial-public/stripe_payments.csv'
+file_format= (
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+) ;
+
+-- 
+SELECT * FROM RAW.JAFFLE_SHOP.CUSTOMERS;
+SELECT * FROM RAW.JAFFLE_SHOP.ORDERS;
+SELECT * FROM RAW.STRIPE.PAYMENT;
