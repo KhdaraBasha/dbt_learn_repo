@@ -1,10 +1,13 @@
 dbt_learn_repo:
-  target: dev
   outputs:
     dev:
-      type: snowflake
+      account: TXEFVXV-BT07947
+      database: DEMO_DB
+      password: Rasul!@#$%12345
       role: ACCOUNTADMIN
+      schema: DBT_RAW
+      threads: 1
+      type: snowflake
+      user: KB20260916
       warehouse: COMPUTE_WH
-      database: DBT_DATABSE
-      schema: RAW_LAYER
-      threads: 8
+  target: dev

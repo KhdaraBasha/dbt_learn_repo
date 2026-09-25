@@ -1,0 +1,11 @@
+[project]
+name = "dbt-learn-repo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dbt-core>=1.12.5",
+    "dbt-snowflake>=1.12.1",
+    "requests>=2.34.2",
+]
