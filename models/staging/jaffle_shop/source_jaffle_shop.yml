@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+    - name: jaffle_shop # name of source
+      database: raw
+      schema: jaffle_shop
+      description: clone of postgres application database
+
+      # freshness: # default freshness
+      #   warns_after: {count: 12, period: hour}
+      #   error_after: {count: 24, period: hour}
+      
+      loaded_at_field: _etl_loaded_at
+
+      tables:
+          - name: customers # This will be use the freshness defined above
+            description: raw customers data
+          - name: orders
+            freshness: # make this a littile more strict
+              warn_after: {count: 6, period: hour}
+              error_after: {count: 24, period: day}
+              # Apply a where clause in the freshness query
+              # filter: datediff('day', _etl_load_at, current_timestamp) < 2

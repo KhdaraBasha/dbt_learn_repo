@@ -9,5 +9,5 @@ dbt_learn_repo:
       threads: 4
       type: snowflake
       user: KB20260916
-      warehouse: TRANSFORMING
+      warehouse: COMPUTE_WH
   target: dev
