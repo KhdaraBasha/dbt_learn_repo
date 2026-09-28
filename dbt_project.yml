@@ -31,18 +31,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbt_learn_repos:
-    staging:
-      +database: DBT_DATABSE
-      +materialized: view
-    
-    cleansing:
-      +database: DBT_DATABSE
-      +schema: cleansing               
-      +materialized: table
-    # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
-    bootcamp:
-      +database: DBT_DATABSE             # ✅ Your final/cleansing layer
-      # +schema: RAW_LAYER
+    marts:
       +materialized: table
+    staging:
+      +materialized: view
