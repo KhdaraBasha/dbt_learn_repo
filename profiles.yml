@@ -1,13 +1,13 @@
 dbt_learn_repo:
   outputs:
     dev:
-      account: TXEFVXV-BT07947
+      account: *****************
       database: RAW
-      password: Rasul!@#$%12345
+      password: ******************
       role: ACCOUNTADMIN
       schema: JAFFLE_SHOP
       threads: 4
       type: snowflake
-      user: KB20260916
+      user: ********************
       warehouse: COMPUTE_WH
   target: dev
